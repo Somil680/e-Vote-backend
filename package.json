@@ -1,0 +1,31 @@
+{
+  "name": "e-vote-backend",
+  "version": "1.0.0",
+  "description": "<h1>hello this is a Repository for making election voting machine </h1>",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --experimental-modules --es-module-specifier-resolution=node index.js",
+    "dev": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Somil680/e-Vote-backend.git"
+  },
+  "author": "Somil agrawal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Somil680/e-Vote-backend/issues"
+  },
+  "homepage": "https://github.com/Somil680/e-Vote-backend#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.18.3",
+    "express-async-handler": "^1.2.0",
+    "mongodb": "^6.4.0",
+    "mongoose": "^8.2.1",
+    "nodemon": "^3.1.0"
+  }
+}
