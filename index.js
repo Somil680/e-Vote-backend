@@ -2,20 +2,17 @@ import dotenv from 'dotenv';
 import express from 'express';
 import cors from "cors";
 import mongoose from "mongoose"
-
+import adminRouter from "./routes/adminAuth.js"
 const app = express()
 const port = 5000
-
-
 dotenv.config();
-
 // app.use(fileUpload({
 //     useTempFiles: true
 // }))
 app.use(cors())
 app.use(express.json())
 
-// app.use("/api/user", router)
+app.use("/api/admin", adminRouter)
 // app.use("/api/post", postRouter)
 // app.use("/api/auth", authRouter)
 // app.use("/api/uploadFile", fileRouter)
