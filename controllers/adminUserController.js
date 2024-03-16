@@ -7,6 +7,7 @@ import jwt from "jsonwebtoken"
 export const signUp = asyncHandler(async (req, res) => {
     const { email, password, name, } = req.body
     let existingUser;
+
     try {
         existingUser = await AdminUser.findOne({ email });
     } catch (error) {
@@ -53,7 +54,6 @@ export const logIn = asyncHandler(async (req, res) => {
                 id: existingUser.id
             }
         }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "30d" });
-
 
         const user = {
             ...existingUser.toObject(),

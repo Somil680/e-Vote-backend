@@ -1,12 +1,13 @@
-import mongoose from "mongoose"
+import mongoose from "mongoose";
+import Election from "../models/electionModal.js"
+const { Schema } = mongoose;
 
-const Schema = mongoose.Schema
+const electionSchema = mongoose.model("Election").schema;
 
 const adminUserSchema = new Schema({
     email: {
         required: true,
         type: String,
-        unique: true
     },
     password: {
         required: true,
@@ -24,10 +25,7 @@ const adminUserSchema = new Schema({
         type: String,
         default: ""
     },
-    election_id: {
-        type: String,
-        default: null
-    },
+
     city: {
         type: String,
         default: ""
@@ -37,10 +35,8 @@ const adminUserSchema = new Schema({
         default: ""
     },
     election: [Schema.Types.Mixed]
-},
-    {
-        timestamps: true
-    }
-)
+}, {
+    timestamps: true
+});
 
-export default mongoose.model("AdminUser", adminUserSchema)
+export default mongoose.model("AdminUser", adminUserSchema);
