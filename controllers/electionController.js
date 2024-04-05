@@ -54,26 +54,39 @@ export const postElection = asyncHandler(async (req, res) => {
 export const getElectionById = asyncHandler(async (req, res) => {
     let elections;
     try {
-        elections = await Election.find({ userId: req.params.id })
+        elections = await Election.find({ userId: req.params.id }).populate("candidates", "name email branch_name year image city state votes");
+        console.log("🚀 ~ getElectionById ~ elections:", elections);
     } catch (error) {
-        console.log("🚀 ~ getElectionById ~ error:", error)
-        return res.status(404).json({ message: "UNABLE TO FETCH ELECTION" })
+        console.log("🚀 ~ getElectionById ~ error:", error);
+        return res.status(404).json({ message: "UNABLE TO FETCH ELECTION" });
     }
     if (!elections) {
-        return res.status(404).json({ message: "NO ELECTION FOUND" })
+        return res.status(404).json({ message: "NO ELECTION FOUND" });
     }
-    res.status(200).json({ elections })
+    res.status(200).json({ elections });
+});
+// export const getElectionById = asyncHandler(async (req, res) => {
+//     let elections;
+//     try {
+//         elections = await Election.find({ userId: req.params.id }).populate("candidates", "name , email , branch_name , year , image , city , state , votes ")
+//         console.log("🚀 ~ getElectionById ~ elections:", elections)
+//     } catch (error) {
+//         console.log("🚀 ~ getElectionById ~ error:", error)
+//         return res.status(404).json({ message: "UNABLE TO FETCH ELECTION" })
+//     }
+//     if (!elections) {
+//         return res.status(404).json({ message: "NO ELECTION FOUND" })
+//     }
+//     res.status(200).json({ elections })
 
-})
+// })
 
 //  UPDATE ElECTION BY ID
 export const updateElection = asyncHandler(async (req, res) => {
-    const { name, description } = req.body
+    const { name, description, election_date, election_duration, access_token, isLive } = req.body
     let election;
     try {
-        election = await Election.findByIdAndUpdate(req.params.id, {
-            name, description
-        })
+        election = await Election.findByIdAndUpdate(req.params.id, { $set: req.body })
     } catch (error) {
         console.log("🚀 ~ updateElection ~ error:", error)
         return res.status(404).json({ message: "UNABLE TO FETCH " })
@@ -82,7 +95,8 @@ export const updateElection = asyncHandler(async (req, res) => {
     if (!election) {
         return res.status(404).json({ message: "ELECTION NOT FOUND" })
     }
-    return res.status(201).json({ message: " ELECTION UPDATE FOUND" })
+
+    return res.status(201).json({ message: " ELECTION UPDATE SUCCESSFULLY" })
 
 
 })

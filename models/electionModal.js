@@ -16,7 +16,28 @@ const electionSchema = new Schema({
         type: String,
         default: ""
     },
-    candidates: [candidateSchema]
+    candidates: [{
+        type: String,
+        ref: "Candidate"
+    }],
+    election_date: {
+        type: Date,
+        default: ""
+    },
+
+    election_duration: {
+        type: Number,
+        default: 1
+    },
+    access_token: {
+        type: String,
+        default: ""
+    },
+    isLive: {
+        type: Boolean,
+        default: false
+    }
+    // candidates: [candidateSchema]
 },
     {
         timestamps: true

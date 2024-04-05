@@ -34,6 +34,11 @@ const adminUserSchema = new Schema({
         type: String,
         default: ""
     },
+    isVerified: {
+        type: Boolean,
+        default: false
+    },
+
     election: [Schema.Types.Mixed]
 }, {
     timestamps: true
