@@ -65,6 +65,7 @@ export const getData = asyncHandler(async (req, res) => {
         res.status(500).json({ message: "Internal Server Error" });
     }
 });
+
 // export const getData = asyncHandler(async (req, res) => {
 //     try {
 //         const user = await User.findByIdAndUpdate(req.params.id, { $set: req.body })
@@ -77,8 +78,6 @@ export const getData = asyncHandler(async (req, res) => {
 //         res.status(403).json({ message: "You cant not update your account" })
 //     }
 // })
-
-
 // POST  LOGIN USER
 export const logIn = asyncHandler(async (req, res) => {
     const { email, password } = req.body;

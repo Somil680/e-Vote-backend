@@ -65,21 +65,23 @@ export const getElectionById = asyncHandler(async (req, res) => {
     }
     res.status(200).json({ elections });
 });
-// export const getElectionById = asyncHandler(async (req, res) => {
-//     let elections;
-//     try {
-//         elections = await Election.find({ userId: req.params.id }).populate("candidates", "name , email , branch_name , year , image , city , state , votes ")
-//         console.log("🚀 ~ getElectionById ~ elections:", elections)
-//     } catch (error) {
-//         console.log("🚀 ~ getElectionById ~ error:", error)
-//         return res.status(404).json({ message: "UNABLE TO FETCH ELECTION" })
-//     }
-//     if (!elections) {
-//         return res.status(404).json({ message: "NO ELECTION FOUND" })
-//     }
-//     res.status(200).json({ elections })
+// GET ElECTION BY ELECTION ID
 
-// })
+export const getElectionId = asyncHandler(async (req, res) => {
+    let elections;
+    try {
+        elections = await Election.find({ _id: req.params.id }).populate("candidates", "name , email , branch_name , year , image , city , state , votes ")
+        console.log("🚀 ~ getElectionById ~ elections:", elections)
+    } catch (error) {
+        console.log("🚀 ~ getElectionById ~ error:", error)
+        return res.status(404).json({ message: "UNABLE TO FETCH ELECTION" })
+    }
+    if (!elections) {
+        return res.status(404).json({ message: "NO ELECTION FOUND" })
+    }
+    res.status(200).json({ elections })
+
+})
 
 //  UPDATE ElECTION BY ID
 export const updateElection = asyncHandler(async (req, res) => {
@@ -118,5 +120,19 @@ export const deleteElection = asyncHandler(async (req, res) => {
     }
     return res.status(200).json({ message: "ELECTION DELETE SUCCESSFULLY" })
 
+
+})
+// GET ALL ELECTION 
+export const getAllElection = asyncHandler(async (req, res) => {
+    let elections;
+    try {
+        elections = await Election.find().populate("candidates", "name email branch_name year image city state votes");
+    } catch (error) {
+        return res.status(404).json({ message: "UNABLE TO FETCH ALL DETAILS ", err: error })
+    }
+    if (!elections) {
+        return res.status(404).json({ message: "NO ELECTION FOUND" })
+    }
+    res.status(200).json({ elections })
 
 })
