@@ -24,6 +24,10 @@ export const postElection = asyncHandler(async (req, res) => {
         userId,
         name,
         description,
+        election_duration,
+        election_date,
+        isLive,
+        access_token,
         candidates: []
     })
     try {
